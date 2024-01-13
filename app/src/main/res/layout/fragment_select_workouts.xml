@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_view"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/choose_workout_bg"
+    tools:context=".excercise.workout.excercises.SelectWorkoutsFragment">
+
+   <RelativeLayout
+       android:id="@+id/rl"
+       android:layout_width="match_parent"
+       android:layout_height="60dp"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       android:background="@color/black">
+
+      <ImageView
+          android:id="@+id/back_btn"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+          android:paddingStart="15dp"
+          android:src="@drawable/back_btn"/>
+
+
+      <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerInParent="true"
+          android:fontFamily="@font/ubuntu_medium"
+          android:paddingStart="15dp"
+          android:text="Select Any 5"
+          android:textAllCaps="true"
+          android:textColor="@color/neon_title"
+          android:textSize="20dp" />
+
+   </RelativeLayout>
+
+
+   <GridView
+       android:id="@+id/gridview"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:horizontalSpacing="20dp"
+       android:numColumns="2"
+       android:layout_marginTop="80dp"
+       android:verticalSpacing="6dp"/>
+
+   <androidx.cardview.widget.CardView
+       android:id="@+id/next_btn"
+       android:layout_width="match_parent"
+       android:layout_height="40dp"
+       android:elevation="10dp"
+       android:visibility="invisible"
+       android:layout_gravity="bottom"
+       android:layout_margin="15dp"
+       app:cardBackgroundColor="@color/neon_title"
+       app:cardCornerRadius="10dp">
+
+      <androidx.appcompat.widget.AppCompatTextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerInParent="true"
+          android:fontFamily="@font/ubuntu_bold"
+          android:paddingStart="15dp"
+          android:text="NEXT"
+          android:layout_gravity="center"
+          android:textAllCaps="true"
+          android:textColor="@color/black"
+          android:textSize="20dp" />
+
+
+   </androidx.cardview.widget.CardView>
+
+</FrameLayout>
