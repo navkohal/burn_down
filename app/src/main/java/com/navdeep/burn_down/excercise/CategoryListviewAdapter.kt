@@ -47,8 +47,22 @@ class CategoryListviewAdapter(var mContext: Context, var dataSet: Array<Int>, va
         viewHolder.excerciseTitle?.setText(titles.get(position))
 
         viewHolder.imageview?.setOnClickListener {
-            mContext.startActivity(Intent(mContext , WorkoutScreen :: class.java))
+            moveToNextScreen(position)
         }
+    }
+
+    private fun moveToNextScreen(position: Int) {
+        var intent = Intent(mContext , WorkoutScreen :: class.java)
+        when (position) {
+            0 ->  intent.putExtra("file_name","cardio.json")
+            1 ->  intent.putExtra("file_name","back.json")
+            2 ->  intent.putExtra("file_name","chest.json")
+            3 ->  intent.putExtra("file_name","arms.json")
+            4 ->  intent.putExtra("file_name","shoulders.json")
+            5 ->  intent.putExtra("file_name","abs.json")
+            6 ->  intent.putExtra("file_name","legs.json")
+        }
+        mContext.startActivity(intent)
     }
 
     // Return the size of your dataset (invoked by the layout manager)

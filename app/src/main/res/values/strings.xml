@@ -1,5 +1,11 @@
 <resources>
-    <string name="app_name">burn_down</string>
+    <string name="app_name">burnOut</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fav_workouts">Favorite Workouts</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="subscribe">Subscription</string>
+    <string name="drawer_open">open_drawer</string>
+    <string name="drawer_close">close_drawer</string>
+
 </resources>

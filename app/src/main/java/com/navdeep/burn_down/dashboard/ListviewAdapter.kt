@@ -8,9 +8,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.navdeep.burn_down.R
+import com.navdeep.burn_down.bmi.CalculateBmiScreen
 import com.navdeep.burn_down.excercise.ExcerciseMainScreen
+import com.navdeep.burn_down.nutrition.NutritionMainScreen
+import com.navdeep.burn_down.yoga.YogaMainScreen
 
-class ListviewAdapter(var mContext: Context, var dataSet: Array<Int>) :
+class ListviewAdapter(var mContext: Context,var itemHeight: Int, var dataSet: Array<Int>) :
         RecyclerView.Adapter<ListviewAdapter.ViewHolder>() {
 
     /**
@@ -40,10 +43,21 @@ class ListviewAdapter(var mContext: Context, var dataSet: Array<Int>) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
+        viewHolder.imageview.layoutParams.height = itemHeight
         viewHolder.imageview.setBackgroundResource(dataSet.get(position))
 
         viewHolder.imageview.setOnClickListener {
-            mContext.startActivity(Intent(mContext , ExcerciseMainScreen :: class.java))
+            movetoNextScreen(position)
+        }
+    }
+
+    private fun movetoNextScreen(position: Int) {
+        when (position) {
+            0 ->  mContext.startActivity(Intent(mContext , ExcerciseMainScreen :: class.java))
+            1 ->  mContext.startActivity(Intent(mContext , YogaMainScreen :: class.java))
+            2 ->  mContext.startActivity(Intent(mContext , NutritionMainScreen :: class.java))
+            3 ->  mContext.startActivity(Intent(mContext , CalculateBmiScreen :: class.java))
+
         }
     }
 

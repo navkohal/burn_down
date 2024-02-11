@@ -32,7 +32,7 @@
             android:layout_centerInParent="true"
             android:fontFamily="@font/ubuntu_medium"
             android:paddingStart="15dp"
-            android:text="Choose Workout"
+            android:text="Select Workout"
             android:textAllCaps="true"
             android:textColor="@color/neon_title"
             android:textSize="20dp" />
@@ -44,8 +44,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/rl"/>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,20 @@
+// share images and videos on instagran
+
+private void shareFileToInstagram(Uri uri, boolean isVideo, Post post) {
+        Intent feedIntent = new Intent(Intent.ACTION_SEND);
+        feedIntent.setType(isVideo ? "video/*" : "image/*");
+        feedIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        feedIntent.setPackage(Constants.INSTAGRAM_PACKAGE_NAME);
+
+        Intent storiesIntent = new Intent("com.instagram.share.ADD_TO_STORY");
+        storiesIntent.setDataAndType(uri, isVideo ? "mp4" : "jpg");
+        storiesIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        storiesIntent.setPackage(Constants.INSTAGRAM_PACKAGE_NAME);
+
+        activity.grantUriPermission(
+                "com.instagram.android", uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+        Intent chooserIntent = Intent.createChooser(feedIntent, getString(R.string.social_instagram));
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {storiesIntent});
+        startActivity(chooserIntent);
+    }

@@ -13,6 +13,7 @@ import com.navdeep.burn_down.model.BaseResponse
 
 
 class StartExcerciseActivity : AppCompatActivity() {
+
     var selectedList: ArrayList<BaseResponse> = arrayListOf()
 
     var backbtn: ImageView? = null
@@ -113,6 +114,7 @@ class StartExcerciseActivity : AppCompatActivity() {
     private fun showCompleteExerciseScreen() {
         var intent = Intent(this, CompleteScreen::class.java)
         intent.putExtra("workoutname",selectedList.get(0).bodyPart)
+        intent.putExtra("excerciseData",selectedList)
         startActivity(intent)
         finish()
     }
