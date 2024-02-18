@@ -45,6 +45,22 @@ class DatabaseService(context: Context) : QueriesInterface {
         return dao.getAllFavorites()
     }
 
+
+    override fun getAllProfile(): ProfileDataClass {
+        return dao.getProfileData()
+    }
+
+    override fun insertProfileData(vararg threads: ProfileDataClass): Int {
+        return try {
+            dao.insert(*threads)
+            1
+        } catch (e: Exception) {
+            e.printStackTrace()
+            0
+        }
+    }
+
+
 //    override fun checkIfFavorite(keyId: String): Boolean {
 //        return dao.checkIfFavoriteAlready(keyId)
 //    }

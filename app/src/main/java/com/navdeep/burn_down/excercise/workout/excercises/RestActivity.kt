@@ -6,6 +6,7 @@ import android.os.CountDownTimer
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.navdeep.burn_down.R
+import com.navdeep.burn_down.Utility
 
 class RestActivity : AppCompatActivity() {
 
@@ -24,9 +25,9 @@ class RestActivity : AppCompatActivity() {
         timerTv = findViewById(R.id.timer_tv)
         timerProgressBar = findViewById(R.id.timer_progress)
         if (isNextSet) {
-            startTimer(5000)
+            startTimer(Utility.REST_TIME_AFTER_SET)
         } else {
-            startTimer(3000)
+            startTimer(Utility.REST_TIME_AFTER_REP)
         }
     }
 

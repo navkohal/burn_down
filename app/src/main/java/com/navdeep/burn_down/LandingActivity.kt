@@ -14,7 +14,6 @@ class LandingActivity : AppCompatActivity() {
     var subscriptionView : View?= null;
     var database: DatabaseService?=null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_landing)
@@ -30,12 +29,22 @@ class LandingActivity : AppCompatActivity() {
         subscriptionView = findViewById(R.id.subscription_view)
 
         trialView?.setOnClickListener {
-            startActivity(Intent(this, Dashboard::class.java))
-            finish()
+            showSetupDataDialog()
+           
         }
 
         subscriptionView?.setOnClickListener {
 
+        }
+    }
+
+    private fun showSetupDataDialog() {
+        if (database!!.getAllProfile() != null) {
+            val intent = Intent(this, Dashboard::class.java)
+            startActivity(intent,  Utility.nextScreen(this).toBundle())
+        } else {
+            val intent = Intent(this, GetUserDataScreen::class.java)
+            startActivity(intent,  Utility.nextScreen(this).toBundle())
         }
     }
 }

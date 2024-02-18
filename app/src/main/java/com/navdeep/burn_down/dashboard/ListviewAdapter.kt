@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.navdeep.burn_down.R
 import com.navdeep.burn_down.bmi.CalculateBmiScreen
@@ -13,8 +14,12 @@ import com.navdeep.burn_down.excercise.ExcerciseMainScreen
 import com.navdeep.burn_down.nutrition.NutritionMainScreen
 import com.navdeep.burn_down.yoga.YogaMainScreen
 
-class ListviewAdapter(var mContext: Context,var itemHeight: Int, var dataSet: Array<Int>) :
+class ListviewAdapter(var mContext: Context,var itemHeight: Int, var dataSet: Array<Int>, var onSelect : OnSelect) :
         RecyclerView.Adapter<ListviewAdapter.ViewHolder>() {
+
+    interface OnSelect {
+        fun onItemSelect(position : Int)
+    }
 
     /**
      * Provide a reference to the type of views that you are using
@@ -52,13 +57,7 @@ class ListviewAdapter(var mContext: Context,var itemHeight: Int, var dataSet: Ar
     }
 
     private fun movetoNextScreen(position: Int) {
-        when (position) {
-            0 ->  mContext.startActivity(Intent(mContext , ExcerciseMainScreen :: class.java))
-            1 ->  mContext.startActivity(Intent(mContext , YogaMainScreen :: class.java))
-            2 ->  mContext.startActivity(Intent(mContext , NutritionMainScreen :: class.java))
-            3 ->  mContext.startActivity(Intent(mContext , CalculateBmiScreen :: class.java))
-
-        }
+        onSelect.onItemSelect(position)
     }
 
     // Return the size of your dataset (invoked by the layout manager)

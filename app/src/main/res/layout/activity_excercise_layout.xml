@@ -97,7 +97,7 @@
 
     <TextView
         android:id="@+id/name_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintLeft_toLeftOf="@+id/guideline1"
@@ -107,6 +107,7 @@
         android:textAllCaps="true"
         android:fontFamily="@font/ubuntu_medium"
         android:textColor="@color/neon_title"
+        android:maxLines="2"
         android:text="Excercise title"/>
 
     <TextView
@@ -214,7 +215,6 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/ubuntu_bold"
-            android:paddingStart="15dp"
             android:text="NEXT"
             android:layout_gravity="center"
             android:textAllCaps="true"

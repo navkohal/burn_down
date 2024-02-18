@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.navdeep.burn_down.R
+import com.navdeep.burn_down.Utility
 import com.navdeep.burn_down.dashboard.Dashboard
 import com.navdeep.burn_down.db.DatabaseService
 import com.navdeep.burn_down.db.FavoriteDataClass
@@ -52,7 +53,7 @@ class FavoriteWorkoutActivity : AppCompatActivity() {
         if (!TextUtils.isEmpty("Excercise_list")) {
             finish()
         } else {
-            startActivity(Intent(this, Dashboard::class.java))
+            startActivity(Intent(this, Dashboard::class.java),  Utility.nextScreen(this).toBundle())
             finish()
         }
     }

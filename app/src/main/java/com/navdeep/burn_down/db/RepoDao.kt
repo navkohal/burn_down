@@ -7,14 +7,16 @@ import androidx.room.Query
 
 @Dao
 interface RepoDao {
-    //    @Insert
-    //    void insert(ProfileDataClass... profileDataClasses);
-    //
-    //    @Query("SELECT * FROM Profile")
-    //    List<ProfileDataClass> getAllProfile();
-    //
-    //    @Query("Delete FROM Profile where business_phone = :business_phone")
-    //    int deleteProfile(String business_phone);
+    @Insert
+    fun insert(vararg profileDataClasses: ProfileDataClass)
+
+    @Query("SELECT * FROM profile")
+    fun getProfileData(): ProfileDataClass
+
+
+//        @Query("Delete FROM Profile where business_phone = :business_phone")
+//        int deleteProfile(String business_phone);
+
     @Insert
     fun insert(vararg favorites: FavoriteDataClass)
 

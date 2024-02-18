@@ -1,24 +1,31 @@
 package com.navdeep.burn_down.dashboard
 
+import android.app.ActivityOptions
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.view.animation.TranslateAnimation
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.appcompat.app.ActionBarDrawerToggle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.navdeep.burn_down.ContactUsActivity
 import com.navdeep.burn_down.R
+import com.navdeep.burn_down.Utility
+import com.navdeep.burn_down.db.DatabaseService
+import com.navdeep.burn_down.db.ProfileDataClass
+import com.navdeep.burn_down.excercise.ExcerciseMainScreen
 import com.navdeep.burn_down.excercise.favorite.FavoriteWorkoutActivity
 
 
-class Dashboard : AppCompatActivity() {
+class Dashboard : AppCompatActivity() , ListviewAdapter.OnSelect{
 
     var itemHeight = 200
 
@@ -31,10 +38,21 @@ class Dashboard : AppCompatActivity() {
     var contactItem: TextView? = null
     var subscription_item: TextView? = null
     var rootview: RelativeLayout? = null
+    lateinit var database: DatabaseService
+    var profileDataClass : ProfileDataClass ?= null
+    var name_tv : TextView ?= null
+    var body_ms_tv : TextView ?= null
+    var name_char_tv : TextView ?= null
+    var firstChar : Char ?= null
+    var nextScreenAnimation = Bundle()
+    var previousScreen = Bundle()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
+
+        database = DatabaseService(this)
+        profileDataClass = database.getAllProfile()
 
         initializeView()
 
@@ -63,11 +81,12 @@ class Dashboard : AppCompatActivity() {
             slideoutView()
             var intent = Intent(this, FavoriteWorkoutActivity::class.java)
             intent.putExtra("screen","Excercise_list")
-            startActivity(intent)
+            startActivity(intent , nextScreenAnimation)
         }
 
         contactItem?.setOnClickListener {
             slideoutView()
+            startActivity(Intent(this , ContactUsActivity :: class.java),nextScreenAnimation)
         }
 
         subscription_item?.setOnClickListener {
@@ -75,6 +94,7 @@ class Dashboard : AppCompatActivity() {
         }
 
     }
+
 
     private fun slideoutView() {
         close_iv?.visibility = View.GONE
@@ -106,9 +126,25 @@ class Dashboard : AppCompatActivity() {
         favoriteItem = findViewById(R.id.fav_item)
         contactItem = findViewById(R.id.contact_item)
         subscription_item = findViewById(R.id.subscription_item)
+        body_ms_tv = findViewById(R.id.body_ms_tv)
+        name_tv = findViewById(R.id.name_tv)
+        name_char_tv = findViewById(R.id.name_char_tv)
 
         side_view_rl?.visibility = View.GONE
 
+        setData()
+
+        nextScreenAnimation = Utility.nextScreen(this).toBundle()
+
+    }
+
+    private fun setData() {
+        if (profileDataClass != null) {
+            name_tv!!.setText(profileDataClass!!.userName)
+            body_ms_tv!!.setText(profileDataClass!!.height + " || "+profileDataClass!!.weight)
+            firstChar = profileDataClass!!.userName.toString().first()
+            name_char_tv!!.setText(firstChar.toString())
+        }
     }
 
     private fun getDisplayMetrics() {
@@ -124,10 +160,25 @@ class Dashboard : AppCompatActivity() {
             R.drawable.workout_plans, R.drawable.yoga_plans,
             R.drawable.nutrition_images, R.drawable.bmi_calculator
         )
-        val customAdapter = ListviewAdapter(this, itemHeight / 4, dataset)
+        val customAdapter = ListviewAdapter(this, itemHeight / 4, dataset , this@Dashboard)
 
         recyclerView?.setLayoutManager(LinearLayoutManager(this));
         recyclerView?.adapter = customAdapter
+    }
+
+    override fun onItemSelect(position: Int) {
+
+        when (position) {
+            0 -> {
+                startActivity(Intent(this , ExcerciseMainScreen :: class.java), nextScreenAnimation)
+            }
+            1 -> Toast.makeText(this, "Yoga Plan will be launched soon", Toast.LENGTH_SHORT).show()
+            2 -> Toast.makeText(this, "Nutrition Plan will be launched soon", Toast.LENGTH_SHORT).show()
+            3 -> Toast.makeText(this, "BMI calculator will be launched soon", Toast.LENGTH_SHORT).show()
+//            1 ->  mContext.startActivity(Intent(mContext , YogaMainScreen :: class.java), nextScreenAnimation)
+//            2 ->  mContext.startActivity(Intent(mContext , NutritionMainScreen :: class.java), nextScreenAnimation)
+//            3 ->  mContext.startActivity(Intent(mContext , CalculateBmiScreen :: class.java), nextScreenAnimation)
+        }
     }
 
 }

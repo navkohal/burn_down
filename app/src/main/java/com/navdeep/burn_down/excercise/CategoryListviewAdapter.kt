@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.navdeep.burn_down.R
+import com.navdeep.burn_down.Utility
 import com.navdeep.burn_down.excercise.workout.WorkoutScreen
 
 class CategoryListviewAdapter(var mContext: Context, var dataSet: Array<Int>, var titles: Array<String>) :
@@ -62,7 +63,7 @@ class CategoryListviewAdapter(var mContext: Context, var dataSet: Array<Int>, va
             5 ->  intent.putExtra("file_name","abs.json")
             6 ->  intent.putExtra("file_name","legs.json")
         }
-        mContext.startActivity(intent)
+        mContext.startActivity(intent,  Utility.nextScreen(mContext).toBundle())
     }
 
     // Return the size of your dataset (invoked by the layout manager)

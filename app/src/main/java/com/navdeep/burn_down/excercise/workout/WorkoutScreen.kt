@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.google.gson.Gson
 import com.navdeep.burn_down.R
+import com.navdeep.burn_down.Utility
 import com.navdeep.burn_down.dashboard.model.BaseWorkoutModelClass
 import com.navdeep.burn_down.excercise.workout.excercises.ChooseExcerciseAdapter
 import com.navdeep.burn_down.excercise.workout.excercises.StartExcerciseActivity
@@ -55,7 +56,7 @@ class WorkoutScreen : AppCompatActivity() , ChooseExcerciseAdapter.OnSelect {
         nextBtn!!.setOnClickListener {
             val intent = Intent(this, StartExcerciseActivity :: class.java)
             intent.putExtra("excerciseData",selectedList)
-            startActivity(intent)
+            startActivity(intent,  Utility.nextScreen(this).toBundle())
         }
 
         backBtn?.setOnClickListener { finish() }

@@ -16,5 +16,16 @@ private void shareFileToInstagram(Uri uri, boolean isVideo, Post post) {
 
         Intent chooserIntent = Intent.createChooser(feedIntent, getString(R.string.social_instagram));
         chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {storiesIntent});
-        startActivity(chooserIntent);
+        startActivity(chooserIntent,  Utility.nextScreen(this).toBundle());
     }
+
+    "Push. Persist. Succeed."
+    "Train. Transform. Triumph."
+    "Sweat. Strive. Shine."
+    "Lift. Love. Repeat."
+    "Focus. Fuel. Finish."
+    "Grind. Grow. Glow."
+    "Commit. Conquer. Celebrate."
+    "Rise. Rep. Repeat."
+    "Strength. Stamina. Spirit."
+    "Effort. Endure. Excel."

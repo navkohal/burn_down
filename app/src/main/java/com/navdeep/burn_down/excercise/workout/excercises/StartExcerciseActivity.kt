@@ -7,8 +7,10 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import com.bumptech.glide.Glide
 import com.navdeep.burn_down.R
+import com.navdeep.burn_down.Utility
 import com.navdeep.burn_down.model.BaseResponse
 
 
@@ -17,6 +19,7 @@ class StartExcerciseActivity : AppCompatActivity() {
     var selectedList: ArrayList<BaseResponse> = arrayListOf()
 
     var backbtn: ImageView? = null
+    var nextBtn: CardView? = null
     var headingTitle: TextView? = null
     var imagView: ImageView? = null
     var title: TextView? = null
@@ -48,6 +51,7 @@ class StartExcerciseActivity : AppCompatActivity() {
 
     private fun setView() {
         backbtn = findViewById(R.id.back_btn)
+        nextBtn = findViewById(R.id.next_btn)
         headingTitle = findViewById(R.id.heading_tv)
         imagView = findViewById(R.id.imageview)
         title = findViewById(R.id.name_tv)
@@ -59,6 +63,13 @@ class StartExcerciseActivity : AppCompatActivity() {
 
         backbtn?.setOnClickListener {
             finish()
+        }
+
+        nextBtn?.setOnClickListener {
+            if (countdown_timer != null) {
+                countdown_timer.cancel()
+            }
+            showRestBetweenReps()
         }
     }
 
@@ -108,14 +119,14 @@ class StartExcerciseActivity : AppCompatActivity() {
             }
             intent.putExtra("isSetComplete", true)
         }
-        startActivityForResult(intent, REST_RESULT_FLAG)
+        startActivityForResult(intent, REST_RESULT_FLAG ,  Utility.nextScreen(this).toBundle())
     }
 
     private fun showCompleteExerciseScreen() {
         var intent = Intent(this, CompleteScreen::class.java)
         intent.putExtra("workoutname",selectedList.get(0).bodyPart)
         intent.putExtra("excerciseData",selectedList)
-        startActivity(intent)
+        startActivity(intent,  Utility.nextScreen(this).toBundle())
         finish()
     }
 

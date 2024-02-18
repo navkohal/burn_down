@@ -4,9 +4,9 @@ import androidx.room.Query
 
 interface QueriesInterface {
 
-//    fun getAllProfiles(): List<ProfileDataClass>?
-//
-//    fun insertProfileData(vararg threads: ProfileDataClass): Int
+    fun getAllProfile(): ProfileDataClass
+
+    fun insertProfileData(vararg threads: ProfileDataClass): Int
 //
 //    fun deleteProfile(threads: String): Int
 //

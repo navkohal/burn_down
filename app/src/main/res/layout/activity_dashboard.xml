@@ -92,14 +92,14 @@
 
 
             <TextView
-                android:id="@+id/age_tv"
+                android:id="@+id/body_ms_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:fontFamily="@font/ubuntu_regular"
                 android:text="32 yrs"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/name_tv"/>
@@ -109,7 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/age_tv">
+                app:layout_constraintTop_toBottomOf="@+id/body_ms_tv">
 
                 <TextView
                     android:id="@+id/home_item"

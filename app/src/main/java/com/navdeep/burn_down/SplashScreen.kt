@@ -28,12 +28,12 @@ class SplashScreen : AppCompatActivity() {
         videoview?.seekTo(1000);
 
         videoview?.setOnCompletionListener(MediaPlayer.OnCompletionListener {
-            startActivity(Intent(this, LandingActivity::class.java))
+            startActivity(Intent(this, LandingActivity::class.java), Utility.nextScreen(this).toBundle())
             finish()
         })
 
         videoview?.setOnClickListener {
-            startActivity(Intent(this, LandingActivity::class.java))
+            startActivity(Intent(this, LandingActivity::class.java),  Utility.nextScreen(this).toBundle())
             finishAffinity()
         }
 

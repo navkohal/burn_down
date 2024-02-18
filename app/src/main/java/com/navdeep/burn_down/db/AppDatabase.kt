@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
-@Database(entities = [FavoriteDataClass::class], version = 1, exportSchema = false)
+@Database(entities = [FavoriteDataClass::class, ProfileDataClass::class], version = 2, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -21,7 +21,7 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "burn_down"
+                    "burn_out"
                 )
                     .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
@@ -31,23 +31,4 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
     }
-
-//    companion object {
-//
-//        private var appDatabase: AppDatabase? = null
-//
-//        @Synchronized
-//        fun getInstance(context: Context): AppDatabase {
-//            if (appDatabase == null) {
-//                appDatabase =
-//                    Room.databaseBuilder(context.applicationContext, AppDatabase::class.java,"burn_down")
-//                        .allowMainThreadQueries()
-//                        .fallbackToDestructiveMigration()
-//                        .build()
-//            }
-//            return appDatabase!!
-//        }
-//    }
-
-
 }

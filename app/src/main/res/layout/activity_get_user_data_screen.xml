@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_centerInParent="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+        <EditText
+            android:id="@+id/name_edt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:fontFamily="@font/ubuntu_medium"
+            android:hint="Your Name"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:singleLine="true"
+            android:background="@android:color/transparent"
+            android:textColorHint="@color/transparent_black"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/transparent_black"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp">
+
+
+        <TextView
+            android:id="@+id/weight_tv"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:padding="10dp"
+            android:textSize="18dp"
+            android:text="Your Weight (lbs)"
+            android:fontFamily="@font/ubuntu_medium"
+            android:singleLine="true"
+            android:background="@android:color/transparent"
+            android:textColor="@color/transparent_black"/>
+
+            <TextView
+                android:id="@+id/weight_value_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_alignParentEnd="true"
+                android:padding="10dp"
+                android:textSize="18dp"
+                android:text="145 lbs"
+                android:fontFamily="@font/ubuntu_medium"
+                android:singleLine="true"
+                android:textColor="@color/neon_title"/>
+
+        </RelativeLayout>
+
+        <SeekBar
+            android:id="@+id/seekBar_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:thumb="@drawable/seekbar_thumb"
+            android:progressDrawable="@drawable/seekbar_track"
+            android:max="300"
+            android:progress="145"
+            android:layout_marginTop="10dp"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp">
+
+            <TextView
+                android:id="@+id/heigth_tv"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:padding="10dp"
+                android:textSize="18dp"
+                android:text="Your Height (cms)"
+                android:fontFamily="@font/ubuntu_medium"
+                android:singleLine="true"
+                android:background="@android:color/transparent"
+                android:textColor="@color/transparent_black"/>
+
+
+            <TextView
+                android:id="@+id/heigth_value_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_alignParentEnd="true"
+                android:padding="10dp"
+                android:textSize="18dp"
+                android:text="160 cm"
+                android:fontFamily="@font/ubuntu_medium"
+                android:singleLine="true"
+                android:textColor="@color/neon_title"/>
+
+        </RelativeLayout>
+
+
+        <SeekBar
+            android:id="@+id/seekBar_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:thumb="@drawable/seekbar_thumb"
+            android:progressDrawable="@drawable/seekbar_track"
+            android:max="320"
+            android:progress="160"
+            android:layout_marginTop="10dp"/>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/next_btn"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="50dp"
+            android:elevation="10dp"
+            android:visibility="visible"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            app:cardBackgroundColor="@color/neon_title"
+            app:cardCornerRadius="10dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/ubuntu_bold"
+                android:text="Done"
+                android:layout_gravity="center"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+
