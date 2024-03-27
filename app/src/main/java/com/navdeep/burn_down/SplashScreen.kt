@@ -81,7 +81,7 @@ class SplashScreen : AppCompatActivity() {
             if (result != null) {
                 val dateTimeString = result.substringAfter("\"datetime\":\"").substringBefore("\",\"timezone\"")
                 val dateOnlyString = getDateFromDateAndTimeString(dateTimeString)
-                var appInstalledDate = AppInstalledDate(dateOnlyString)
+                var appInstalledDate = AppInstalledDate(0,dateOnlyString)
                 database?.insertAppInstalledDate(appInstalledDate)
                 Log.d("TAG", "onMyPostExecute: "+dateOnlyString)
                 // Use dateTimeString as needed
