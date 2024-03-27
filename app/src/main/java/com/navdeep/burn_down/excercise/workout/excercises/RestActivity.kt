@@ -26,8 +26,10 @@ class RestActivity : AppCompatActivity() {
         timerProgressBar = findViewById(R.id.timer_progress)
         if (isNextSet) {
             startTimer(Utility.REST_TIME_AFTER_SET)
+            timerProgressBar?.max = 45
         } else {
             startTimer(Utility.REST_TIME_AFTER_REP)
+            timerProgressBar?.max = 30
         }
     }
 

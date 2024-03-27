@@ -150,7 +150,7 @@
         app:layout_constraintRight_toLeftOf="@+id/guideline1"
         app:layout_constraintTop_toBottomOf="@+id/guideline3"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
-        android:max="15"
+        android:max="30"
         android:progressDrawable="@drawable/progress_bar"/>
 
     <TextView

@@ -17,6 +17,7 @@ class LandingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_landing)
+
         database = DatabaseService(applicationContext)
 
         var mContext : Context = this

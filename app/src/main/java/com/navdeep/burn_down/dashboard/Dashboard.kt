@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.navdeep.burn_down.ContactUsActivity
 import com.navdeep.burn_down.R
 import com.navdeep.burn_down.Utility
+import com.navdeep.burn_down.bmi.CalculateBmiScreen
 import com.navdeep.burn_down.db.DatabaseService
 import com.navdeep.burn_down.db.ProfileDataClass
 import com.navdeep.burn_down.excercise.ExcerciseMainScreen
@@ -174,7 +175,9 @@ class Dashboard : AppCompatActivity() , ListviewAdapter.OnSelect{
             }
             1 -> Toast.makeText(this, "Yoga Plan will be launched soon", Toast.LENGTH_SHORT).show()
             2 -> Toast.makeText(this, "Nutrition Plan will be launched soon", Toast.LENGTH_SHORT).show()
-            3 -> Toast.makeText(this, "BMI calculator will be launched soon", Toast.LENGTH_SHORT).show()
+            3 ->  {
+                startActivity(Intent(this , CalculateBmiScreen :: class.java), nextScreenAnimation)
+            }
 //            1 ->  mContext.startActivity(Intent(mContext , YogaMainScreen :: class.java), nextScreenAnimation)
 //            2 ->  mContext.startActivity(Intent(mContext , NutritionMainScreen :: class.java), nextScreenAnimation)
 //            3 ->  mContext.startActivity(Intent(mContext , CalculateBmiScreen :: class.java), nextScreenAnimation)

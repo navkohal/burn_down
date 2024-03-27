@@ -10,7 +10,13 @@
     <color name="neon_title">#C2F50E</color>
     <color name="transparent_black">#6820201E</color>
     <color name="pink">#F607EB</color>
+    <color name="orange">#F69607</color>
+    <color name="green">#30B618</color>
+    <color name="yellow">#FFE91F</color>
+    <color name="red">#FF411F</color>
+
 
 
     <color name="blue">#26D8EF</color>
+    <color name="fb_blue">#126AF1</color>
 </resources>

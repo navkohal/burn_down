@@ -13,6 +13,12 @@ interface RepoDao {
     @Query("SELECT * FROM profile")
     fun getProfileData(): ProfileDataClass
 
+    @Insert
+    fun insert(vararg date: AppInstalledDate)
+
+    @Query("SELECT * FROM app_installed_date")
+    fun getAppInstalledDate(): AppInstalledDate
+
 
 //        @Query("Delete FROM Profile where business_phone = :business_phone")
 //        int deleteProfile(String business_phone);

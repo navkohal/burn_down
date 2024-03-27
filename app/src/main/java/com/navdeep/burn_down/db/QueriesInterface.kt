@@ -15,6 +15,11 @@ interface QueriesInterface {
 
     fun getAllFavorites(): List<FavoriteDataClass>?
 
+    fun insertAppInstalledDate(vararg threads: AppInstalledDate): Int
+
+    fun getAppInstalledDate(): AppInstalledDate
+
+
 
 //    fun checkIfFavorite(keyId: String): Boolean
 //

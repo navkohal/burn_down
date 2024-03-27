@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
-@Database(entities = [FavoriteDataClass::class, ProfileDataClass::class], version = 2, exportSchema = false)
+@Database(entities = [FavoriteDataClass::class, ProfileDataClass::class, AppInstalledDate::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 

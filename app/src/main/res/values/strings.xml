@@ -8,5 +8,17 @@
     <string name="drawer_open">open_drawer</string>
     <string name="drawer_close">close_drawer</string>
     <string name="contact_email">kivytechnology.18@gmail.com</string>
+    <string name="camera_not_found">Camera not found</string>
+    <string name="male">Male</string>
+    <string name="femaletext">Female</string>
+    <string name="height">Height (cms)</string>
+    <string name="unit">Weight</string>
+    <string name="calculate_your_bmi">DONE</string>
+    <string name="weight">Weight (lbs)</string>
+    <string name="age">Age</string>
+    <string name="get_result">GET RESULT</string>
+    <string name="done">DONE</string>
+    <string name="recalculate">Recalculate</string>
+    <string name="trial_desc">This app is currently in a trial version and will be available for a limited period of time. One of its key features is that it does not require an internet connection. It operates entirely offline, storing all your data locally on your device. You can perform workouts offline and save them to your favorite list. Additionally, you can calculate your BMI (Body Mass Index). In the next update, we plan to introduce a YOGA and Nutrition module as well.\n\nPlease enjoy and review the app and dont forget to send us your views on kivytechnology@gmail.com. Rewards(Subscription discounts) will be awarded to the users for their special feedbacks in next App update.\n\nThanks</string>
 
 </resources>

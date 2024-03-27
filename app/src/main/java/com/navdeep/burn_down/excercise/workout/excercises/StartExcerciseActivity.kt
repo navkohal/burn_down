@@ -41,8 +41,7 @@ class StartExcerciseActivity : AppCompatActivity() {
 
         if (intent.extras != null) {
             selectedList = intent.getSerializableExtra("excerciseData") as ArrayList<BaseResponse>
-//            totalExcerciseCount = selectedList.size-1
-            totalExcerciseCount = 1
+            totalExcerciseCount = selectedList.size-1
         }
 
         setView()
@@ -88,7 +87,7 @@ class StartExcerciseActivity : AppCompatActivity() {
             .load(res)
             .into(imagView!!)
 
-        startTimer(3000)
+        startTimer(30000)
         repsTv?.text = "$repsCount" + "/3\nREPS"
     }
 

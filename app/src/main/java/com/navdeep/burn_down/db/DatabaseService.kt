@@ -45,6 +45,20 @@ class DatabaseService(context: Context) : QueriesInterface {
         return dao.getAllFavorites()
     }
 
+    override fun insertAppInstalledDate(vararg threads: AppInstalledDate): Int {
+        return try {
+            dao.insert(*threads)
+            1
+        } catch (e: Exception) {
+            e.printStackTrace()
+            0
+        }
+    }
+
+    override fun getAppInstalledDate(): AppInstalledDate {
+        return dao.getAppInstalledDate()
+    }
+
 
     override fun getAllProfile(): ProfileDataClass {
         return dao.getProfileData()
@@ -59,6 +73,7 @@ class DatabaseService(context: Context) : QueriesInterface {
             0
         }
     }
+
 
 
 //    override fun checkIfFavorite(keyId: String): Boolean {
