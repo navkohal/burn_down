@@ -31,9 +31,9 @@ class WorkoutScreen : AppCompatActivity() , ChooseExcerciseAdapter.OnSelect {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getData()
         if (intent.extras != null) {
             fileName = intent.getStringExtra("file_name").toString()
+            getData()
         }
 
         setContentView(R.layout.activity_workout_screen)

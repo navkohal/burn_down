@@ -89,6 +89,7 @@ class StartExcerciseActivity : AppCompatActivity() {
 
         startTimer(30000)
         repsTv?.text = "$repsCount" + "/3\nREPS"
+        repsProgressBar?.setProgress(repsCount*10 , true)
     }
 
     private fun startTimer(timer: Long) {

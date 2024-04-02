@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.navdeep.burn_down.ContactUsActivity
 import com.navdeep.burn_down.R
+import com.navdeep.burn_down.SubscriptionScreen
 import com.navdeep.burn_down.Utility
 import com.navdeep.burn_down.bmi.CalculateBmiScreen
 import com.navdeep.burn_down.db.DatabaseService
@@ -92,6 +93,9 @@ class Dashboard : AppCompatActivity() , ListviewAdapter.OnSelect{
 
         subscription_item?.setOnClickListener {
             slideoutView()
+            var intent = Intent(this, SubscriptionScreen::class.java)
+            intent.putExtra("screen","dashboard")
+            startActivity(intent,nextScreenAnimation)
         }
 
     }

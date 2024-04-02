@@ -68,7 +68,8 @@ class GetUserDataScreen : AppCompatActivity() {
 
                 saveProfileData()
 
-                startActivity(Intent(this, Dashboard::class.java),  Utility.nextScreen(this).toBundle())
+//                startActivity(Intent(this, Dashboard::class.java),  Utility.nextScreen(this).toBundle())
+                startActivity(Intent(this, SubscriptionScreen::class.java),  Utility.nextScreen(this).toBundle())
                 finish()
             }
         }

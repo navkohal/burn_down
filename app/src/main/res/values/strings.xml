@@ -20,5 +20,10 @@
     <string name="done">DONE</string>
     <string name="recalculate">Recalculate</string>
     <string name="trial_desc">This app is currently in a trial version and will be available for a limited period of time. One of its key features is that it does not require an internet connection. It operates entirely offline, storing all your data locally on your device. You can perform workouts offline and save them to your favorite list. Additionally, you can calculate your BMI (Body Mass Index). In the next update, we plan to introduce a YOGA and Nutrition module as well.\n\nPlease enjoy and review the app and dont forget to send us your views on kivytechnology@gmail.com. Rewards(Subscription discounts) will be awarded to the users for their special feedbacks in next App update.\n\nThanks</string>
+    <string name="workout_label">Multiple Workouts to Choose</string>
+    <string name="yoga_label">Multiple Yoga postures</string>
+    <string name="nut_plan">Multiple Yoga Plans</string>
+    <string name="bmi">Calculate your BMI</string>
+    <string name="description_sub">Skip will let you to use BurnOut application for first 30 days without any subscription. After that you have to buy subscription or in app purchase to use BurnOut</string>
 
 </resources>
