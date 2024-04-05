@@ -25,5 +25,7 @@
     <string name="nut_plan">Multiple Yoga Plans</string>
     <string name="bmi">Calculate your BMI</string>
     <string name="description_sub">Skip will let you to use BurnOut application for first 30 days without any subscription. After that you have to buy subscription or in app purchase to use BurnOut</string>
+    <string name="buy_subscription_message">Buy any of the Subscription Plan to enjoy more of the workouts</string>
+    <string name="no_internet">No Internet Available. Turn on the Internet to Sync with Google Play Store , if you have any Active plan or not. Please restart app for better experience</string>
 
 </resources>

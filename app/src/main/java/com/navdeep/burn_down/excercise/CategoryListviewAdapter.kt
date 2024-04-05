@@ -10,9 +10,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.navdeep.burn_down.R
 import com.navdeep.burn_down.Utility
+import com.navdeep.burn_down.Utility.showSubscriptionDialog
 import com.navdeep.burn_down.excercise.workout.WorkoutScreen
 
-class CategoryListviewAdapter(var mContext: Context, var dataSet: Array<Int>, var titles: Array<String>) :
+class CategoryListviewAdapter(
+    var mContext: Context,
+    var dataSet: Array<Int>,
+    var titles: Array<String>,
+    var isSubscriptionActive: Boolean
+) :
         RecyclerView.Adapter<CategoryListviewAdapter.ViewHolder>() {
 
     /**
@@ -21,11 +27,13 @@ class CategoryListviewAdapter(var mContext: Context, var dataSet: Array<Int>, va
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var imageview: ImageView ?= null
+        var locked_iv: ImageView ?= null
         var excerciseTitle: TextView ?= null
 
         init {
             // Define click listener for the ViewHolder's View
             imageview = view.findViewById(R.id.imageview)
+            locked_iv = view.findViewById(R.id.locked)
             excerciseTitle = view.findViewById(R.id.title_tv)
         }
     }
@@ -44,11 +52,36 @@ class CategoryListviewAdapter(var mContext: Context, var dataSet: Array<Int>, va
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
+        if (!isSubscriptionActive) {
+            setLockedView(viewHolder, position)
+        }
+
         viewHolder.imageview?.setBackgroundResource(dataSet.get(position))
         viewHolder.excerciseTitle?.setText(titles.get(position))
 
         viewHolder.imageview?.setOnClickListener {
-            moveToNextScreen(position)
+            if (position <= 1) {
+                moveToNextScreen(position)
+            } else if (!isSubscriptionActive) {
+                //showSubscriptionDialog
+                showSubscriptionDialog(
+                    mContext,
+                    mContext.getString(R.string.buy_subscription_message),
+                    "home"
+                )
+            } else {
+                moveToNextScreen(position)
+            }
+        }
+    }
+
+    private fun setLockedView(viewHolder: ViewHolder, position: Int) {
+        when(position) {
+            2 -> viewHolder.locked_iv?.visibility = View.VISIBLE
+            3 -> viewHolder.locked_iv?.visibility = View.VISIBLE
+            4 -> viewHolder.locked_iv?.visibility = View.VISIBLE
+            5 -> viewHolder.locked_iv?.visibility = View.VISIBLE
+            6 -> viewHolder.locked_iv?.visibility = View.VISIBLE
         }
     }
 
@@ -63,6 +96,7 @@ class CategoryListviewAdapter(var mContext: Context, var dataSet: Array<Int>, va
             5 ->  intent.putExtra("file_name","abs.json")
             6 ->  intent.putExtra("file_name","legs.json")
         }
+
         mContext.startActivity(intent,  Utility.nextScreen(mContext).toBundle())
     }
 

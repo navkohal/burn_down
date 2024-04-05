@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -20,6 +21,7 @@ import com.navdeep.burn_down.ContactUsActivity
 import com.navdeep.burn_down.R
 import com.navdeep.burn_down.SubscriptionScreen
 import com.navdeep.burn_down.Utility
+import com.navdeep.burn_down.Utility.getCurrentDate
 import com.navdeep.burn_down.bmi.CalculateBmiScreen
 import com.navdeep.burn_down.db.DatabaseService
 import com.navdeep.burn_down.db.ProfileDataClass
@@ -56,11 +58,17 @@ class Dashboard : AppCompatActivity() , ListviewAdapter.OnSelect{
         database = DatabaseService(this)
         profileDataClass = database.getAllProfile()
 
+
         initializeView()
 
         getDisplayMetrics()
 
         setClickListners()
+    }
+
+
+    override fun onResume() {
+        super.onResume()
     }
 
     private fun setClickListners() {

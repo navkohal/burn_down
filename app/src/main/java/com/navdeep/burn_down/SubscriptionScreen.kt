@@ -2,7 +2,6 @@ package com.navdeep.burn_down
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -14,6 +13,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.android.billingclient.api.*
+import com.navdeep.burn_down.Utility.showSubscriptionDialog
 import com.navdeep.burn_down.dashboard.Dashboard
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
@@ -38,18 +38,19 @@ class SubscriptionScreen : Activity() , PurchasesUpdatedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_subscription_screen)
+
+        if (!Utility.isInternetAvailable(this)) {
+            // Handle no internet connection
+            showSubscriptionDialog(this, "No Internet available.", "HOME")
+        } else {
+            setupBillingClient()
+        }
 
         if (intent.extras != null) {
             screenName = intent.getStringExtra("screen")!!
         }
-
-        if (!Utility.isInternetAvailable(this)) {
-            // Handle no internet connection
-            return
-        }
-
-        setupBillingClient()
 
         viewPager = findViewById(R.id.viewPager)
         monthly = findViewById(R.id.monthly_iv)
@@ -85,10 +86,20 @@ class SubscriptionScreen : Activity() , PurchasesUpdatedListener {
 
 
         all_time?.setOnClickListener {
+            if (!Utility.isInternetAvailable(this)) {
+                // Handle no internet connection
+                showSubscriptionDialog(this, "No Internet available.", "HOME")
+                return@setOnClickListener
+            }
             initiateAllTimePurchase()
         }
 
         monthly?.setOnClickListener {
+            if (!Utility.isInternetAvailable(this)) {
+                // Handle no internet connection
+                showSubscriptionDialog(this, "No Internet available.", "HOME")
+                return@setOnClickListener
+            }
             initiateMontlySubscriptionPurchase()
         }
 
@@ -269,7 +280,12 @@ class SubscriptionScreen : Activity() , PurchasesUpdatedListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        billingClient.endConnection()
+        if (Utility.isInternetAvailable(this)) {
+            // Handle no internet connection
+            if (billingClient != null) {
+                billingClient.endConnection()
+            }
+        }
     }
 
 }

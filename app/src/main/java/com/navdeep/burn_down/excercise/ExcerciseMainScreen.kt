@@ -1,15 +1,12 @@
 package com.navdeep.burn_down.excercise
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.navdeep.burn_down.R
-import com.navdeep.burn_down.excercise.favorite.FavoriteWorkoutActivity
-import com.navdeep.burn_down.excercise.workout.excercises.CompleteScreen
+import com.navdeep.burn_down.Utility
 
 class ExcerciseMainScreen : AppCompatActivity() {
 
@@ -35,10 +32,17 @@ class ExcerciseMainScreen : AppCompatActivity() {
     }
 
     private fun setListViewData() {
-        val customAdapter = CategoryListviewAdapter(this, dataset,titles)
-
-        val recyclerView: RecyclerView = findViewById(R.id.category_list)
-        recyclerView.setLayoutManager(LinearLayoutManager(this));
-        recyclerView.adapter = customAdapter
+        if ((!Utility.getFromSharedPreferences(this, "isInAppProductPurchased"))
+            || (!Utility.getFromSharedPreferences(this, "isActiveSubscription"))) {
+            val customAdapter = CategoryListviewAdapter(this, dataset,titles, false)
+            val recyclerView: RecyclerView = findViewById(R.id.category_list)
+            recyclerView.setLayoutManager(LinearLayoutManager(this));
+            recyclerView.adapter = customAdapter
+        } else {
+            val customAdapter = CategoryListviewAdapter(this, dataset,titles , true)
+            val recyclerView: RecyclerView = findViewById(R.id.category_list)
+            recyclerView.setLayoutManager(LinearLayoutManager(this));
+            recyclerView.adapter = customAdapter
+        }
     }
 }
