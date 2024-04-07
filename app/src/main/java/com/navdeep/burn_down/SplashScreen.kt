@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
+import com.navdeep.burn_down.Utility.getFromSharedPreferences
 import com.navdeep.burn_down.dashboard.Dashboard
 import com.navdeep.burn_down.db.AppInstalledDate
 import com.navdeep.burn_down.db.DatabaseService
@@ -57,8 +58,13 @@ class SplashScreen : AppCompatActivity() {
 
     fun navigateToNextScreen() {
         if (database!!.getAllProfile() != null) {
-            startActivity(Intent(this, Dashboard::class.java),  Utility.nextScreen(this).toBundle())
-            finishAffinity()
+            if (getFromSharedPreferences(this , "isChecked")) {
+                startActivity(Intent(this, Dashboard::class.java),  Utility.nextScreen(this).toBundle())
+                finishAffinity()
+            } else {
+                startActivity(Intent(this, SubscriptionScreen::class.java),  Utility.nextScreen(this).toBundle())
+                finishAffinity()
+            }
         } else {
             startActivity(Intent(this, IntroductionScreen::class.java),  Utility.nextScreen(this).toBundle())
             finishAffinity()

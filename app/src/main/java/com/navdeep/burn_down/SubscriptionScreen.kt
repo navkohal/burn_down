@@ -8,11 +8,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.android.billingclient.api.*
+import com.navdeep.burn_down.Utility.getFromSharedPreferences
+import com.navdeep.burn_down.Utility.saveToSharedPreferences
 import com.navdeep.burn_down.Utility.showSubscriptionDialog
 import com.navdeep.burn_down.dashboard.Dashboard
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
@@ -39,6 +43,7 @@ class SubscriptionScreen : Activity() , PurchasesUpdatedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         setContentView(R.layout.activity_subscription_screen)
 
         if (!Utility.isInternetAvailable(this)) {
@@ -57,10 +62,11 @@ class SubscriptionScreen : Activity() , PurchasesUpdatedListener {
         all_time = findViewById(R.id.all_time_iv)
         skip_tv = findViewById(R.id.skip_tv)
         desc_tv = findViewById(R.id.desc_tv)
+        val scrollview = findViewById<ScrollView>(R.id.scrollview)
+        val checkboxEnable: CheckBox = findViewById(R.id.checkbox)
 
-        if (!TextUtils.isEmpty((screenName))) {
-            desc_tv.visibility = View.GONE
-            skip_tv.visibility = View.GONE
+        if (getFromSharedPreferences(this , "isChecked")) {
+            checkboxEnable.visibility = View.GONE
         }
 
         val images = listOf(
@@ -104,8 +110,24 @@ class SubscriptionScreen : Activity() , PurchasesUpdatedListener {
         }
 
         skip_tv?.setOnClickListener {
-            startActivity(Intent(this , Dashboard :: class.java))
-            finish()
+            if (getFromSharedPreferences(this,"isChecked")) {
+                startActivity(Intent(this , Dashboard :: class.java))
+                finish()
+            }else {
+                val scrollHeight = scrollview.getChildAt(0).height
+
+                // Scroll down to the bottom of the ScrollView content
+                scrollview.smoothScrollTo(0, scrollHeight)
+            }
+        }
+
+        // Set a listener to detect changes in checkbox state
+        checkboxEnable.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                saveToSharedPreferences(this, "isChecked", true)
+            } else {
+                saveToSharedPreferences(this, "isChecked", false)
+            }
         }
 
     }
