@@ -58,13 +58,13 @@ class SplashScreen : AppCompatActivity() {
 
     fun navigateToNextScreen() {
         if (database!!.getAllProfile() != null) {
-            if (getFromSharedPreferences(this , "isChecked")) {
+//            if (getFromSharedPreferences(this , "isChecked")) {
                 startActivity(Intent(this, Dashboard::class.java),  Utility.nextScreen(this).toBundle())
                 finishAffinity()
-            } else {
-                startActivity(Intent(this, SubscriptionScreen::class.java),  Utility.nextScreen(this).toBundle())
-                finishAffinity()
-            }
+//            } else {
+//                startActivity(Intent(this, SubscriptionScreen::class.java),  Utility.nextScreen(this).toBundle())
+//                finishAffinity()
+//            }
         } else {
             startActivity(Intent(this, IntroductionScreen::class.java),  Utility.nextScreen(this).toBundle())
             finishAffinity()

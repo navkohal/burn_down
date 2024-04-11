@@ -14,14 +14,13 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.android.billingclient.api.*
 import com.navdeep.burn_down.Utility.getFromSharedPreferences
 import com.navdeep.burn_down.Utility.saveToSharedPreferences
 import com.navdeep.burn_down.Utility.showSubscriptionDialog
 import com.navdeep.burn_down.dashboard.Dashboard
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
-class SubscriptionScreen : Activity() , PurchasesUpdatedListener {
+class SubscriptionScreen : Activity() {
 
     private val TAG = javaClass.name
 
@@ -34,11 +33,11 @@ class SubscriptionScreen : Activity() , PurchasesUpdatedListener {
 
     private val allTimePurchase = "com.burnout.buy"; //inApp
     private val monthlyPurchase = "com.burnout.monthly"; //subscription
-    lateinit var sku_monhtly : SkuDetails
-    lateinit var sku_allTime : SkuDetails
+//    lateinit var sku_monhtly : SkuDetails
+//    lateinit var sku_allTime : SkuDetails
     var screenName : String = ""
 
-    private lateinit var billingClient: BillingClient
+//    private lateinit var billingClient: BillingClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -133,21 +132,21 @@ class SubscriptionScreen : Activity() , PurchasesUpdatedListener {
     }
 
     private fun initiateMontlySubscriptionPurchase() {
-        val skuDetails = SkuDetails(sku_monhtly.originalJson)
-        val billingFlowParams = BillingFlowParams.newBuilder()
-            .setSkuDetails(skuDetails)
-            .build()
-
-        billingClient.launchBillingFlow(this, billingFlowParams)
+//        val skuDetails = SkuDetails(sku_monhtly.originalJson)
+//        val billingFlowParams = BillingFlowParams.newBuilder()
+//            .setSkuDetails(skuDetails)
+//            .build()
+//
+//        billingClient.launchBillingFlow(this, billingFlowParams)
     }
 
     private fun initiateAllTimePurchase() {
-        val skuDetails = SkuDetails(sku_allTime.originalJson)
-        val billingFlowParams = BillingFlowParams.newBuilder()
-            .setSkuDetails(skuDetails)
-            .build()
-
-        billingClient.launchBillingFlow(this, billingFlowParams)
+//        val skuDetails = SkuDetails(sku_allTime.originalJson)
+//        val billingFlowParams = BillingFlowParams.newBuilder()
+//            .setSkuDetails(skuDetails)
+//            .build()
+//
+//        billingClient.launchBillingFlow(this, billingFlowParams)
     }
 
     override fun onResume() {
@@ -182,132 +181,138 @@ class SubscriptionScreen : Activity() , PurchasesUpdatedListener {
         }
     }
 
-    override fun onPurchasesUpdated(billingResult: BillingResult,
-                                    purchases: MutableList<Purchase>?) {
-        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
-            // Process the purchased item(s)
-            purchases.forEach { purchase ->
-                handlePurchase(purchase)
-            }
-        } else if (billingResult.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
-            // Handle user cancellation
-        } else {
-            // Handle other errors
-        }
-    }
+//    override fun onPurchasesUpdated(billingResult: BillingResult,
+//                                    purchases: MutableList<Purchase>?) {
+//        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
+//            // Process the purchased item(s)
+//            purchases.forEach { purchase ->
+//                handlePurchase(purchase)
+//            }
+//        } else if (billingResult.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
+//            // Handle user cancellation
+//        } else {
+//            // Handle other errors
+//        }
+//    }
 
 
     private fun setupBillingClient() {
-        billingClient = BillingClient.newBuilder(this)
-            .setListener(this)
-            .enablePendingPurchases()
-            .build()
-
-        //connectToBillingService
-        billingClient.startConnection(object : BillingClientStateListener {
-            override fun onBillingSetupFinished(billingResult: BillingResult) {
-                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-
-                    querySkuDetailsForMonthlySubscription()
-
-                    querySkuDetailsForInApp()
-                    // Start your purchase flow here
-                } else {
-                    // Handle billing setup failure
-                    Log.d(TAG, "onBillingSetupFinished: "+"failed")
-                }
-            }
-
-            override fun onBillingServiceDisconnected() {
-                // Handle billing service disconnection
-                Log.d(TAG, "onBillingServiceDisconnected: "+"No Google services availaable")
-            }
-        })
+//        billingClient = BillingClient.newBuilder(this)
+//            .setListener(this)
+//            .enablePendingPurchases()
+//            .build()
+//
+//        //connectToBillingService
+//        billingClient.startConnection(object : BillingClientStateListener {
+//            override fun onBillingSetupFinished(billingResult: BillingResult) {
+//                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+//
+//                    querySkuDetailsForMonthlySubscription()
+//
+//                    querySkuDetailsForInApp()
+//                    // Start your purchase flow here
+//                } else {
+//                    // Handle billing setup failure
+//                    Log.d(TAG, "onBillingSetupFinished: "+"failed")
+//                }
+//            }
+//
+//            override fun onBillingServiceDisconnected() {
+//                // Handle billing service disconnection
+//                Log.d(TAG, "onBillingServiceDisconnected: "+"No Google services availaable")
+//            }
+//        })
     }
 
 
     private fun querySkuDetailsForInApp() {
-        val skuList = listOf(allTimePurchase)
-        val params = SkuDetailsParams.newBuilder()
-            .setSkusList(skuList)
-            .setType(BillingClient.SkuType.INAPP)
-            .build()
-
-        billingClient.querySkuDetailsAsync(params) { billingResult, skuDetailsList ->
-            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                // Process the result
-                skuDetailsList?.forEach { skuDetails ->
-                    sku_allTime = skuDetails
-                    val price = skuDetails.price
-                    // Handle the SKU details as needed
-                }
-            } else {
-                // Handle query SKU details failure
-            }
-        }
+//        val skuList = listOf(allTimePurchase)
+//        val params = SkuDetailsParams.newBuilder()
+//            .setSkusList(skuList)
+//            .setType(BillingClient.SkuType.INAPP)
+//            .build()
+//
+//        billingClient.querySkuDetailsAsync(params) { billingResult, skuDetailsList ->
+//            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+//                // Process the result
+//                skuDetailsList?.forEach { skuDetails ->
+//                    sku_allTime = skuDetails
+//                    val price = skuDetails.price
+//                    // Handle the SKU details as needed
+//                }
+//            } else {
+//                // Handle query SKU details failure
+//            }
+//        }
     }
 
     private fun querySkuDetailsForMonthlySubscription() {
-        val skuList = listOf(monthlyPurchase)
-        val params = SkuDetailsParams.newBuilder()
-            .setSkusList(skuList)
-            .setType(BillingClient.SkuType.SUBS)
-            .build()
-
-        billingClient.querySkuDetailsAsync(params) { billingResult, skuDetailsList ->
-            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                // Process the result
-                skuDetailsList?.forEach { skuDetails ->
-                    sku_monhtly = skuDetails
-                    val price = skuDetails.price
-                    // Handle the SKU details as needed
-                }
-            } else {
-                // Handle query SKU details failure
-            }
-        }
+//        val skuList = listOf(monthlyPurchase)
+//        val params = SkuDetailsParams.newBuilder()
+//            .setSkusList(skuList)
+//            .setType(BillingClient.SkuType.SUBS)
+//            .build()
+//
+//        billingClient.querySkuDetailsAsync(params) { billingResult, skuDetailsList ->
+//            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+//                // Process the result
+//                skuDetailsList?.forEach { skuDetails ->
+//                    sku_monhtly = skuDetails
+//                    val price = skuDetails.price
+//                    // Handle the SKU details as needed
+//                }
+//            } else {
+//                // Handle query SKU details failure
+//            }
+//        }
     }
 
-    private fun handlePurchase(purchase: Purchase) {
-        val sku = purchase
-        val purchaseToken = purchase.purchaseToken
-        val purchaseTime = purchase.purchaseTime
-        val orderId = purchase.orderId
-        val isAutoRenewing = purchase.isAutoRenewing
-        val developerPayload = purchase.developerPayload
-        val signature = purchase.signature
-
-        // Example: Logging purchase details
-        Log.d(TAG, "Purchase Details:")
-        Log.d(TAG, "SKU: $sku")
-        Log.d(TAG, "Purchase Token: $purchaseToken")
-        Log.d(TAG, "Purchase Time: $purchaseTime")
-        Log.d(TAG, "Order ID: $orderId")
-        Log.d(TAG, "Auto-Renewing: $isAutoRenewing")
-        Log.d(TAG, "Developer Payload: $developerPayload")
-        Log.d(TAG, "Signature: $signature")
-
-        // Example: Grant the purchased item to the user
-        grantItemToUser(sku)
-    }
-
-    private fun grantItemToUser(sku: Purchase) {
-        // Logic to grant the purchased item to the user
-        // This could involve unlocking premium features, removing ads, etc.
-        Log.d(TAG, "Granting item to user: $sku")
-        val intent = Intent(Utility.ACTION_SUBSCRIPTION_PURCHASED)
-// Add any additional data to the intent if needed
-        sendBroadcast(intent)
-    }
+//    private fun handlePurchase(purchase: Purchase) {
+//        if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
+//            val sku = purchase
+//            val purchaseToken = purchase.purchaseToken
+//            val purchaseTime = purchase.purchaseTime
+//            val orderId = purchase.orderId
+//            val isAutoRenewing = purchase.isAutoRenewing
+//            val developerPayload = purchase.developerPayload
+//            val signature = purchase.signature
+//
+//            // Example: Logging purchase details
+//            Log.d(TAG, "Purchase Details:")
+//            Log.d(TAG, "SKU: $sku")
+//            Log.d(TAG, "Purchase Token: $purchaseToken")
+//            Log.d(TAG, "Purchase Time: $purchaseTime")
+//            Log.d(TAG, "Order ID: $orderId")
+//            Log.d(TAG, "Auto-Renewing: $isAutoRenewing")
+//            Log.d(TAG, "Developer Payload: $developerPayload")
+//            Log.d(TAG, "Signature: $signature")
+//
+//            // Example: Grant the purchased item to the user
+//            grantItemToUser(sku)
+//        } else {
+//            Log.d(TAG, "Purchase Error" +purchase.purchaseState)
+//        }
+//    }
+//
+//    private fun grantItemToUser(sku: Purchase) {
+//        // Logic to grant the purchased item to the user
+//        // This could involve unlocking premium features, removing ads, etc.
+////        Log.d(TAG, "Granting item to user: $sku")
+////        val intent = Intent(Utility.ACTION_SUBSCRIPTION_PURCHASED)
+////// Add any additional data to the intent if needed
+////        sendBroadcast(intent)
+//        startActivity(Intent(this , Dashboard::class.java))
+//        finishAffinity()
+//    }
 
     override fun onDestroy() {
         super.onDestroy()
-        if (Utility.isInternetAvailable(this)) {
-            // Handle no internet connection
-            if (billingClient != null) {
-                billingClient.endConnection()
-            }
-        }
+//        if (Utility.isInternetAvailable(this)) {
+//            // Handle no internet connection
+//            if (billingClient != null) {
+//                billingClient.endConnection()
+//            }
+//        }
     }
 
 }

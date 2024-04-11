@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.navdeep.burn_down.R
 import com.navdeep.burn_down.Utility
-import com.navdeep.burn_down.Utility.showSubscriptionDialog
 import com.navdeep.burn_down.excercise.workout.WorkoutScreen
 
 class CategoryListviewAdapter(
@@ -52,26 +51,26 @@ class CategoryListviewAdapter(
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        if (!isSubscriptionActive) {
-            setLockedView(viewHolder, position)
-        }
+//        if (!isSubscriptionActive) {
+//            setLockedView(viewHolder, position)
+//        }
 
         viewHolder.imageview?.setBackgroundResource(dataSet.get(position))
         viewHolder.excerciseTitle?.setText(titles.get(position))
 
         viewHolder.imageview?.setOnClickListener {
-            if (position <= 1) {
+//            if (position <= 1) {
+//                moveToNextScreen(position)
+//            } else if (!isSubscriptionActive) {
+//                //showSubscriptionDialog
+//                showSubscriptionDialog(
+//                    mContext,
+//                    mContext.getString(R.string.buy_subscription_message),
+//                    "home"
+//                )
+//            } else {
                 moveToNextScreen(position)
-            } else if (!isSubscriptionActive) {
-                //showSubscriptionDialog
-                showSubscriptionDialog(
-                    mContext,
-                    mContext.getString(R.string.buy_subscription_message),
-                    "home"
-                )
-            } else {
-                moveToNextScreen(position)
-            }
+//            }
         }
     }
 

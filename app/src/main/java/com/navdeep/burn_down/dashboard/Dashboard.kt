@@ -100,10 +100,10 @@ class Dashboard : AppCompatActivity() , ListviewAdapter.OnSelect{
         }
 
         subscription_item?.setOnClickListener {
-            slideoutView()
-            var intent = Intent(this, SubscriptionScreen::class.java)
-            intent.putExtra("screen","dashboard")
-            startActivity(intent,nextScreenAnimation)
+//            slideoutView()
+//            var intent = Intent(this, SubscriptionScreen::class.java)
+//            intent.putExtra("screen","dashboard")
+//            startActivity(intent,nextScreenAnimation)
         }
 
     }
@@ -139,6 +139,7 @@ class Dashboard : AppCompatActivity() , ListviewAdapter.OnSelect{
         favoriteItem = findViewById(R.id.fav_item)
         contactItem = findViewById(R.id.contact_item)
         subscription_item = findViewById(R.id.subscription_item)
+        subscription_item?.visibility = View.GONE
         body_ms_tv = findViewById(R.id.body_ms_tv)
         name_tv = findViewById(R.id.name_tv)
         name_char_tv = findViewById(R.id.name_char_tv)
