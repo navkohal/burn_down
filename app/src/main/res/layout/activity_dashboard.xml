@@ -169,7 +169,7 @@
                 android:fontFamily="@font/ubuntu_regular"
                 android:gravity="end"
                 android:padding="10dp"
-                android:text="App Version : 1.0v"
+                android:text="App Version : 1.0.8v"
                 android:textColor="@color/neon_title"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent" />
