@@ -14,6 +14,7 @@ import com.navdeep.burn_down.Utility
 import com.navdeep.burn_down.db.DatabaseService
 import com.navdeep.burn_down.db.FavoriteDataClass
 import com.navdeep.burn_down.excercise.ExcerciseMainScreen
+import com.navdeep.burn_down.excercise.camera.CameraActivity
 import com.navdeep.burn_down.excercise.favorite.FavoriteWorkoutActivity
 import com.navdeep.burn_down.model.BaseResponse
 import java.text.SimpleDateFormat
@@ -24,7 +25,7 @@ class CompleteScreen : AppCompatActivity() {
 
     var workoutNameTv : TextView ?= null
     var gotoHomeBtn : CardView ?= null
-    var goto_favorite : CardView ?= null
+    var camera_btn : CardView ?= null
     var favorite_btn : ImageView ?= null
     var unfavorite_btn : ImageView ?= null
     var workoutName = ""
@@ -56,9 +57,10 @@ class CompleteScreen : AppCompatActivity() {
             finish()
         }
 
-        goto_favorite?.setOnClickListener {
-            startActivity(Intent(this, FavoriteWorkoutActivity :: class.java),  Utility.nextScreen(this).toBundle())
-            finish()
+        camera_btn?.setOnClickListener {
+            startActivity(Intent(this@CompleteScreen , CameraActivity :: class.java))
+//            startActivity(Intent(this, FavoriteWorkoutActivity :: class.java),  Utility.nextScreen(this).toBundle())
+//            finish()
         }
 
         var isFavorite = false;
@@ -82,7 +84,7 @@ class CompleteScreen : AppCompatActivity() {
     private fun initializeView() {
         workoutNameTv = findViewById(R.id.workout_title_tv)
         gotoHomeBtn = findViewById(R.id.goto_home_btn)
-        goto_favorite = findViewById(R.id.goto_favorite)
+        camera_btn = findViewById(R.id.camera_btn)
         favorite_btn = findViewById(R.id.favorite_btn)
         unfavorite_btn = findViewById(R.id.unfavorite_btn)
     }

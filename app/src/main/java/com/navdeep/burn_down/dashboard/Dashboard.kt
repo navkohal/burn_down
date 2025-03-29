@@ -1,5 +1,6 @@
 package com.navdeep.burn_down.dashboard
 
+import android.annotation.SuppressLint
 import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
@@ -17,10 +18,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.navdeep.burn_down.ContactUsActivity
-import com.navdeep.burn_down.R
-import com.navdeep.burn_down.SubscriptionScreen
-import com.navdeep.burn_down.Utility
+import com.navdeep.burn_down.*
 import com.navdeep.burn_down.Utility.getCurrentDate
 import com.navdeep.burn_down.bmi.CalculateBmiScreen
 import com.navdeep.burn_down.db.DatabaseService
@@ -186,8 +184,8 @@ class Dashboard : AppCompatActivity() , ListviewAdapter.OnSelect{
             0 -> {
                 startActivity(Intent(this , ExcerciseMainScreen :: class.java), nextScreenAnimation)
             }
-            1 -> Toast.makeText(this, "Yoga Plan will be launched soon", Toast.LENGTH_SHORT).show()
-            2 -> Toast.makeText(this, "Nutrition Plan will be launched soon", Toast.LENGTH_SHORT).show()
+            1 -> openWebLink(getString(R.string.yoga_link));
+            2 -> openWebLink(getString(R.string.nutrition_link))
             3 ->  {
                 startActivity(Intent(this , CalculateBmiScreen :: class.java), nextScreenAnimation)
             }
@@ -195,6 +193,12 @@ class Dashboard : AppCompatActivity() , ListviewAdapter.OnSelect{
 //            2 ->  mContext.startActivity(Intent(mContext , NutritionMainScreen :: class.java), nextScreenAnimation)
 //            3 ->  mContext.startActivity(Intent(mContext , CalculateBmiScreen :: class.java), nextScreenAnimation)
         }
+    }
+
+    private fun openWebLink(url: String) {
+        val intent = Intent(this, WebViewActivity::class.java)
+        intent.putExtra("link", url)
+        startActivity(intent)
     }
 
 }
