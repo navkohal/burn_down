@@ -6,14 +6,14 @@ plugins {
 
 android {
     namespace 'com.navdeep.burn_down'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.navdeep.burn_down"
         minSdk 28
-        targetSdk 34
-        versionCode 10
-        versionName "2.0.0"
+        targetSdk 35
+        versionCode 12
+        versionName "2.0.02"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
