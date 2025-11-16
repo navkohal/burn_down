@@ -12,6 +12,7 @@ class RestActivity : AppCompatActivity() {
 
     lateinit var countdown_timer: CountDownTimer
     var timerTv : TextView?= null
+    var skipTV : TextView?= null
     var timerProgressBar: ProgressBar?= null
     var isNextSet = false;
     val REST_RESULT_FLAG = 786
@@ -23,6 +24,7 @@ class RestActivity : AppCompatActivity() {
         }
         setContentView(R.layout.activity_rest)
         timerTv = findViewById(R.id.timer_tv)
+        skipTV = findViewById(R.id.skip_tv)
         timerProgressBar = findViewById(R.id.timer_progress)
         if (isNextSet) {
             startTimer(Utility.REST_TIME_AFTER_SET)
@@ -30,6 +32,12 @@ class RestActivity : AppCompatActivity() {
         } else {
             startTimer(Utility.REST_TIME_AFTER_REP)
             timerProgressBar?.max = 30
+        }
+
+        skipTV?.setOnClickListener {
+            countdown_timer.cancel()
+            setResult(REST_RESULT_FLAG)
+            finish()
         }
     }
 

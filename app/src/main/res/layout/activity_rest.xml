@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/transparent_black"
+    android:background="@color/black"
     tools:context=".excercise.workout.excercises.RestActivity">
 
 
@@ -48,6 +48,22 @@
         android:fontFamily="@font/ubuntu_bold"
         android:textColor="@color/neon_title"
         android:hint="30\nsec"
+        android:textAlignment="center"/>
+
+
+    <TextView
+        android:id="@+id/skip_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="25dp"
+        android:padding="15dp"
+        android:textSize="20dp"
+        android:text="SKIP >>"
+        android:fontFamily="@font/ubuntu_medium"
+        android:textColor="@color/neon_title"
         android:textAlignment="center"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
