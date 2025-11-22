@@ -23,7 +23,6 @@ class StartExcerciseActivity : AppCompatActivity() {
     var headingTitle: TextView? = null
     var imagView: ImageView? = null
     var title: TextView? = null
-    var eqp_title: TextView? = null
     var timerTv: TextView? = null
     var repsTv: TextView? = null
     var timerProgressBar: ProgressBar? = null
@@ -54,7 +53,6 @@ class StartExcerciseActivity : AppCompatActivity() {
         headingTitle = findViewById(R.id.heading_tv)
         imagView = findViewById(R.id.imageview)
         title = findViewById(R.id.name_tv)
-        eqp_title = findViewById(R.id.equipment_title)
         timerProgressBar = findViewById(R.id.timer_progress)
         timerTv = findViewById(R.id.timer_tv)
         repsProgressBar = findViewById(R.id.reps_progress)
@@ -75,13 +73,27 @@ class StartExcerciseActivity : AppCompatActivity() {
     private fun setData() {
         headingTitle?.setText(selectedList.get(excerciseCount).bodyPart)
         title?.setText(selectedList.get(excerciseCount).name)
-        eqp_title?.setText(selectedList.get(excerciseCount).equipment)
 
         val res = resources.getIdentifier(
             selectedList.get(excerciseCount).gifUrl,
             "drawable",
             this.packageName
         )
+
+        // Get screen height in pixels
+        val screenHeight = resources.displayMetrics.heightPixels
+
+// Calculate 40% of screen height
+        val imageViewHeight = (screenHeight * 0.4).toInt()
+
+// Get current layout params of ImageView
+        val imageLayoutParams = imagView?.layoutParams
+
+// Set new height
+        imageLayoutParams?.height = imageViewHeight
+
+// Apply updated layout params
+        imagView?.layoutParams = imageLayoutParams
 
         Glide.with(this)
             .load(res)
@@ -91,6 +103,7 @@ class StartExcerciseActivity : AppCompatActivity() {
         repsTv?.text = "$repsCount" + "/3\nREPS"
         repsProgressBar?.setProgress(repsCount*10 , true)
     }
+
 
     private fun startTimer(timer: Long) {
         countdown_timer = object : CountDownTimer(timer, 1000) {

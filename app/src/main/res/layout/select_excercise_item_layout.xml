@@ -1,40 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/cardview"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="160dp"
-    android:layout_height="100dp"
-    android:padding="50dp"
-    android:layout_margin="2dp"
-    android:elevation="2dp"
-    app:cardBackgroundColor="@android:color/transparent"
-    android:layout_marginVertical="5dp"
-    android:layout_marginHorizontal="5dp"
-    app:cardCornerRadius="10dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/title_tv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/neon_title"
-            android:textSize="14dp"
-            android:maxLines="3"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
-            android:textAllCaps="true"
-            android:gravity="center"
-            android:text="EXCERCISE 1 DESalhsdgfgfi"
-            android:layout_gravity="center"
-            android:fontFamily="@font/ubuntu_bold"/>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:elevation="2dp"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:layout_constraintWidth_percent="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/check_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/check"
-            android:visibility="invisible"
-            android:layout_gravity="bottom|center"/>
+                        <!-- Background image -->
+                        <ImageView
+                            android:id="@+id/background_iv"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitCenter"
+                            android:background="#ffffff"
+                            android:src="@drawable/image_1" />
 
-</androidx.cardview.widget.CardView>
+                        <!-- Black semi-transparent overlay -->
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#80000000" /> <!-- 50% opacity black -->
 
+                        <!-- Centered title text -->
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/title_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp"
+                            android:maxLines="3"
+                            android:gravity="bottom|center"
+                            android:textAllCaps="true"
+                            android:text="EXERCISE 1 DESalhsdgfgfi"
+                            android:fontFamily="@font/ubuntu_bold"
+                            android:padding="10dp"/>
+
+                        <!-- Top-right arrow/check icon -->
+                        <ImageView
+                            android:id="@+id/check_iv"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/check"
+                            android:visibility="invisible"
+                            android:layout_gravity="top|end"
+                            android:layout_margin="8dp"/>
+
+                </FrameLayout>
+
+        </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

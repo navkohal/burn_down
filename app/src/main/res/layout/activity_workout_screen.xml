@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/choose_workout_bg">
+    android:background="@color/black">
 
     <RelativeLayout
         android:id="@+id/rl"
@@ -32,7 +32,7 @@
             android:layout_centerInParent="true"
             android:fontFamily="@font/ubuntu_medium"
             android:paddingStart="15dp"
-            android:text="Select Any 5"
+            android:text="Select Workouts"
             android:textAllCaps="true"
             android:textColor="@color/neon_title"
             android:textSize="20dp" />
@@ -44,10 +44,9 @@
         android:id="@+id/gridview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:horizontalSpacing="20dp"
         android:numColumns="2"
         android:layout_marginTop="80dp"
-        android:verticalSpacing="6dp"/>
+        android:verticalSpacing="5dp"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/next_btn"

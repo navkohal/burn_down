@@ -49,13 +49,40 @@ class CategoryListviewAdapter(
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
+        val itemHeight = if (dataSet.size > 0) {
+            val screenHeight = mContext.resources.displayMetrics.heightPixels
+            val density = mContext.resources.displayMetrics.density
+            val toolbarHeight = (56 * density).toInt() // Convert dp to pixels
+            val availableHeight = screenHeight - toolbarHeight
+            (availableHeight / dataSet.size)
+        } else {
+            100
+        }
+
+        val layoutParams = viewHolder.itemView.layoutParams as RecyclerView.LayoutParams
+        layoutParams.height = itemHeight
+
+// Add extra bottom margin if this is the last item
+        if (position == dataSet.size - 1) {
+            val density = mContext.resources.displayMetrics.density
+            layoutParams.bottomMargin = (60 * density).toInt() // 60dp in pixels
+        } else {
+            layoutParams.bottomMargin = 0
+        }
+
+        viewHolder.itemView.layoutParams = layoutParams
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
 //        if (!isSubscriptionActive) {
 //            setLockedView(viewHolder, position)
 //        }
 
+        // Set ImageView height
+        val imageLayoutParams = viewHolder.imageview?.layoutParams
+        imageLayoutParams?.height = itemHeight
+        viewHolder.imageview?.layoutParams = imageLayoutParams
         viewHolder.imageview?.setBackgroundResource(dataSet.get(position))
+
         viewHolder.excerciseTitle?.setText(titles.get(position))
 
         viewHolder.imageview?.setOnClickListener {

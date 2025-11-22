@@ -9,6 +9,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import com.bumptech.glide.Glide
 import com.navdeep.burn_down.R
 import com.navdeep.burn_down.model.BaseResponse
 
@@ -35,10 +36,23 @@ class ChooseExcerciseAdapter(
             holder.mTextView = myView!!.findViewById<TextView>(R.id.title_tv) as TextView
             holder.cardview = myView!!.findViewById<CardView>(R.id.cardview) as CardView
             holder.chk_imageview = myView!!.findViewById<ImageView>(R.id.check_iv) as ImageView
+            holder.background_iv = myView!!.findViewById<ImageView>(R.id.background_iv) as ImageView
             myView.setTag(holder)
         } else {
             holder = myView.getTag() as ViewHolder
 
+        }
+        val res = context.resources.getIdentifier(
+            dataSet?.get(position)?.gifUrl,
+            "drawable",
+            this.context.packageName
+        )
+
+        //play gif
+        holder.background_iv?.let { imageView ->
+            Glide.with(context)
+                .load(res)
+                .into(imageView)
         }
 
         holder.mTextView?.setText(dataSet?.get(position)?.name)
@@ -72,6 +86,7 @@ class ChooseExcerciseAdapter(
         var mTextView: TextView? = null
         var cardview: CardView? = null
         var chk_imageview: ImageView? = null
+        var background_iv: ImageView? = null
     }
 
 }

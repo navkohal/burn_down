@@ -99,7 +99,7 @@ class WorkoutScreen : AppCompatActivity() , ChooseExcerciseAdapter.OnSelect {
                 count = count+1
             }
         }
-        if (count == 5) {
+        if (count >= 1) {
             nextBtn!!.visibility = View.VISIBLE
         } else {
             nextBtn!!.visibility = View.INVISIBLE
