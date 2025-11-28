@@ -1,5 +1,6 @@
 package com.navdeep.burn_down.excercise
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.navdeep.burn_down.R
 import com.navdeep.burn_down.Utility
+import com.navdeep.burn_down.dashboard.Dashboard
 
 class ExcerciseMainScreen : AppCompatActivity() {
 
@@ -25,6 +27,8 @@ class ExcerciseMainScreen : AppCompatActivity() {
 
         back_btn = findViewById(R.id.back_btn)
         back_btn?.setOnClickListener {
+            val intent = Intent(this, Dashboard::class.java)
+            startActivity(intent, Utility.lastScreen(this).toBundle())
             finish()
         }
 

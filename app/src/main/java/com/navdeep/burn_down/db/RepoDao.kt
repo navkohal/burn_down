@@ -29,6 +29,15 @@ interface RepoDao {
     @Query("SELECT * FROM add_favorite")
     fun getAllFavorites(): List<FavoriteDataClass>
 
+    // Check if a workout already exists
+    @Query("SELECT COUNT(*) > 0 FROM add_favorite WHERE name = :name")
+    fun checkIfFavoriteAlready(name: String): Boolean
+
+    // Delete a workout from favorites
+    @Query("DELETE FROM add_favorite WHERE name = :name")
+    fun deleteFavorite(name: String)
+
+
     //    @Query("Select * FROM Favorite where key_id = :key_id")
 //    boolean checkIfFavoriteAlready(String key_id);
 //

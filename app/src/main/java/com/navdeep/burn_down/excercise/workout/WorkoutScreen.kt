@@ -57,6 +57,7 @@ class WorkoutScreen : AppCompatActivity() , ChooseExcerciseAdapter.OnSelect {
             val intent = Intent(this, StartExcerciseActivity :: class.java)
             intent.putExtra("excerciseData",selectedList)
             startActivity(intent,  Utility.nextScreen(this).toBundle())
+            finish()
         }
 
         backBtn?.setOnClickListener { finish() }

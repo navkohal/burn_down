@@ -32,5 +32,6 @@
     <string name="share_on">Share on</string>
     <string name="yoga_link"><![CDATA[https://www.yogajournal.com/poses/]]></string>
     <string name="nutrition_link">https://www.eatwelltas.org.au/recipes/</string>
+    <string name="no_favorites_added_nmark_workouts_favorite_from_workout_complete_screen">No Favorites Added\nMark workouts Favorite from Workout Complete Screen</string>
 
 </resources>

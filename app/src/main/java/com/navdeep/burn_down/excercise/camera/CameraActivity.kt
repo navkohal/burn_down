@@ -1,6 +1,7 @@
 package com.navdeep.burn_down.excercise.camera
 
 import android.app.Activity
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -18,6 +19,7 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.cardview.widget.CardView
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.LifecycleOwner
@@ -45,9 +47,12 @@ class CameraActivity : AppCompatActivity() {
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA // Start with rear camera
     private lateinit var cameraProvider: ProcessCameraProvider
 
+    private val CAMERA_PERMISSION_CODE = 100
+    var isPermissionGranted = false
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("MYTAG", "onCreate: "+"YESS")
         setContentView(R.layout.activity_camera_layout)
 
         initializeView()
@@ -55,6 +60,10 @@ class CameraActivity : AppCompatActivity() {
         startCamera()
 
         captureButton.setOnClickListener {
+            if (!isPermissionGranted) {
+                checkCameraPermissions()
+                return@setOnClickListener
+            }
             captureImage()
         }
 
@@ -64,6 +73,41 @@ class CameraActivity : AppCompatActivity() {
         }
 
         cameraExecutor = Executors.newSingleThreadExecutor()
+    }
+
+    private fun checkCameraPermissions() {
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
+            == PackageManager.PERMISSION_GRANTED) {
+            // Permission already granted
+            isPermissionGranted = true
+        } else {
+            // Request permission
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.CAMERA),
+                CAMERA_PERMISSION_CODE
+            )
+            isPermissionGranted = false
+        }
+    }
+
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            CAMERA_PERMISSION_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //do nothing
+                    isPermissionGranted = true
+                } else {
+                    checkCameraPermissions()
+                }
+            }
+        }
     }
 
     private fun setOnClickListeners() {

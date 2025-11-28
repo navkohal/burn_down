@@ -11,4 +11,5 @@ data class FavoriteDataClass(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     @ColumnInfo(name = "date") var completedDate: String,
     @ColumnInfo(name = "workout_fav_list") var yourModelList: List<BaseResponse>,
+    @ColumnInfo(name = "name") var workoutName: String,
 )

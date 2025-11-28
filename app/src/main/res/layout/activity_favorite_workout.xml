@@ -44,5 +44,20 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/rl"/>
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/placeholder_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/ubuntu_regular"
+        android:lineSpacingMultiplier="1.5"
+        android:visibility="gone"
+        android:text="@string/no_favorites_added_nmark_workouts_favorite_from_workout_complete_screen"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textAlignment="center"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

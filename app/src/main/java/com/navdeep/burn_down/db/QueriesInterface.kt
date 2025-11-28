@@ -19,6 +19,10 @@ interface QueriesInterface {
 
     fun getAppInstalledDate(): AppInstalledDate
 
+    fun isWorkoutFavorite(string : String) : Boolean
+
+    fun deleteFavoriteWorkout(string : String)
+
 
 
 //    fun checkIfFavorite(keyId: String): Boolean

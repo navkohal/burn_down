@@ -32,6 +32,7 @@ class CompleteScreen : AppCompatActivity() {
     var workoutList: ArrayList<BaseResponse> = arrayListOf()
     var completionDate = ""
     var bitmap : Bitmap ?= null
+    var isFavorite = false;
 
     lateinit var database: DatabaseService
 
@@ -53,7 +54,11 @@ class CompleteScreen : AppCompatActivity() {
 
     private fun setClickListeners() {
         gotoHomeBtn?.setOnClickListener {
-            startActivity(Intent(this, ExcerciseMainScreen :: class.java),  Utility.nextScreen(this).toBundle())
+            val intent = Intent(this, ExcerciseMainScreen::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+
+            startActivity(intent, Utility.nextScreen(this).toBundle())
             finish()
         }
 
@@ -63,22 +68,39 @@ class CompleteScreen : AppCompatActivity() {
 //            finish()
         }
 
-        var isFavorite = false;
+
+        unfavorite_btn?.setOnClickListener {
+            isFavorite = false
+            favorite_btn?.visibility = View.VISIBLE
+            unfavorite_btn?.visibility = View.GONE
+            database.deleteFavoriteWorkout(workoutName)
+        }
+
         favorite_btn?.setOnClickListener {
-            if (!isFavorite) {
                 isFavorite = true
                 favorite_btn?.visibility = View.GONE
                 unfavorite_btn?.visibility = View.VISIBLE
-                var favoriteModelClass = FavoriteDataClass(0,completionDate,workoutList)
+                var favoriteModelClass = FavoriteDataClass(0,completionDate,workoutList, workoutName)
                 database.insertFavoriteWorkout(favoriteModelClass)
-            } else {
-                isFavorite = false
-            }
+        }
+    }
+
+    private fun checkIfFavorite() {
+        val workoutKey = workoutName // using workoutName as key
+        isFavorite = database.isWorkoutFavorite(workoutKey)
+
+        if (isFavorite) {
+            favorite_btn?.visibility = View.GONE
+            unfavorite_btn?.visibility = View.VISIBLE
+        } else {
+            favorite_btn?.visibility = View.VISIBLE
+            unfavorite_btn?.visibility = View.GONE
         }
     }
 
     private fun setData() {
         workoutNameTv?.text = workoutName + "\non" + "\n"+completionDate
+        checkIfFavorite()
     }
 
     private fun initializeView() {

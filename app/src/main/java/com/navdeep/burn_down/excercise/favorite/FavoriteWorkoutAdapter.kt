@@ -10,9 +10,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.navdeep.burn_down.R
 import com.navdeep.burn_down.db.FavoriteDataClass
+import com.navdeep.burn_down.model.BaseResponse
 
-class FavoriteWorkoutAdapter(var mContext: Context, var fav_list: ArrayList<FavoriteDataClass>) :
+class FavoriteWorkoutAdapter(var mContext: Context, var fav_list: ArrayList<FavoriteDataClass>
+    ,var listener: OnFavoriteClickListener) :
     RecyclerView.Adapter<FavoriteWorkoutAdapter.ViewHolder>() {
+
+    interface OnFavoriteClickListener {
+        fun onFavoriteClicked(item: List<BaseResponse>)
+    }
 
     /**
      * Provide a reference to the type of views that you are using
@@ -42,6 +48,7 @@ class FavoriteWorkoutAdapter(var mContext: Context, var fav_list: ArrayList<Favo
 
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val item = fav_list
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
@@ -49,9 +56,9 @@ class FavoriteWorkoutAdapter(var mContext: Context, var fav_list: ArrayList<Favo
         viewHolder.excerciseTitle?.setText(fav_list.get(position).yourModelList.get(0).bodyPart)
         viewHolder.date_title?.setText(fav_list.get(position).completedDate)
 
-//        viewHolder.imageview?.setOnClickListener {
-//            moveToNextScreen(position)
-//        }
+        viewHolder.imageview?.setOnClickListener {
+            listener.onFavoriteClicked(item.get(position).yourModelList)
+        }
     }
 
     private fun getBgImage(bodyPart: String?) : Int {

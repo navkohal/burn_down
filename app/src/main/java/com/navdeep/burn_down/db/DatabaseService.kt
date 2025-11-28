@@ -59,7 +59,6 @@ class DatabaseService(context: Context) : QueriesInterface {
         return dao.getAppInstalledDate()
     }
 
-
     override fun getAllProfile(): ProfileDataClass {
         return dao.getProfileData()
     }
@@ -71,6 +70,23 @@ class DatabaseService(context: Context) : QueriesInterface {
         } catch (e: Exception) {
             e.printStackTrace()
             0
+        }
+    }
+
+    override fun isWorkoutFavorite(workoutKey: String): Boolean {
+        return try {
+            dao.checkIfFavoriteAlready(workoutKey)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
+
+    override fun deleteFavoriteWorkout(workoutKey: String) {
+        try {
+            dao.deleteFavorite(workoutKey)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
